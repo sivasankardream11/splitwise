@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Create/Update Bill{% endblock %}
+
+{% block content %}
+    <h1>{% if bill %}Update{% else %}Create{% endif %} Bill</h1>
+    <form method="post" action="{% if bill %}{% url 'bill-update' bill.id %}{% else %}{% url 'bill-create' %}{% endif %}">
+        {% csrf_token %}
+        <!-- Form fields for creating/updating a bill -->
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="{{ bill.title|default:'' }}">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description">{{ bill.description|default:'' }}</textarea>
+        <button type="submit">{% if bill %}Update{% else %}Create{% endif %} Bill</button>
+    </form>
+{% endblock %}
