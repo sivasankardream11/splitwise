@@ -1,18 +1,15 @@
 from django.urls import path
-from BillManagement.views import (  # Ensure you import views correctly
-    BillCreateView,
-    BillDetailView,
-    BillUpdateView,
-    BillDeleteView,
-    BillSplitView,
-    BillSettlementView
-)
+from . import views
 
 urlpatterns = [
-    path('bill/create/', BillCreateView.as_view(), name='bill-create'),
-    path('bill/<int:pk>/', BillDetailView.as_view(), name='bill-detail'),
-    path('bill/<int:pk>/update/', BillUpdateView.as_view(), name='bill-update'),
-    path('bill/<int:pk>/delete/', BillDeleteView.as_view(), name='bill-delete'),
-    path('bill/<int:bill_id>/split/', BillSplitView.as_view(), name='bill-split'),
-    path('bill/split/<int:split_id>/settle/', BillSettlementView.as_view(), name='bill-settle'),
+    # Group-related endpoints
+    path('groups/create/', views.CreateGroupApiView.as_view(), name='create_group'),
+    path('groups/add_user/', views.AddUserToGroupApiView.as_view(), name='add_user_to_group'),
+    path('groups/members/', views.ShowGroupMembersApiView.as_view(), name='show_group_members'),
+    path('groups/delete/', views.DeleteGroupApiView.as_view(), name='delete_group'),
+    path('groups/details/', views.ShowGroupDetailsApiView.as_view(), name='show_group_details'),
+
+    # Expense-related endpoints
+    path('expenses/create/', views.CreateExpenseApiView.as_view(), name='create_expense'),
+    path('expenses/record_payment/', views.RecordPaymentApiView.as_view(), name='record_payment'),
 ]

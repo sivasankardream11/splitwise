@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}User Details{% endblock %}
+
+{% block content %}
+<h2>User Details</h2>
+<form method="get" action="{% url 'show_user_details' %}">
+    <div>
+        <label for="email">User Email:</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <button type="submit">Show Details</button>
+</form>
+
+{% if user %}
+    <h3>{{ user }}</h3>
+    <p>Total Debt: {{ total_debt }}</p>
+    <p>Total Credit: {{ total_credit }}</p>
+    <h4>Debt Summary:</h4>
+    <ul>
+        {% for item in debt_summary %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+{% elif error %}
+    <p>{{ error }}</p>
+{% endif %}
+{% endblock %}

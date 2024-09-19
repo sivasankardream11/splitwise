@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Record Payment{% endblock %}
+
+{% block content %}
+<h2>Record Payment</h2>
+<form method="post" action="{% url 'record_payment' %}">
+    {% csrf_token %}
+    <div>
+        <label for="from_user">From User (email):</label>
+        <input type="email" id="from_user" name="from_user" required>
+    </div>
+    <div>
+        <label for="to_user">To User (email):</label>
+        <input type="email" id="to_user" name="to_user" required>
+    </div>
+    <div>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" required>
+    </div>
+    <div>
+        <label for="group_name">Group Name (optional):</label>
+        <input type="text" id="group_name" name="group_name">
+    </div>
+    <div>
+        <label for="expense_name">Expense Name (optional):</label>
+        <input type="text" id="expense_name" name="expense_name">
+    </div>
+    <button type="submit">Record Payment</button>
+</form>
+{% if message %}
+    <p>{{ message }}</p>
+{% elif error %}
+    <p>{{ error }}</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Create Expense{% endblock %}
+
+{% block content %}
+<h2>Create Expense</h2>
+<form method="post" action="{% url 'create_expense' %}">
+    {% csrf_token %}
+    <div>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required>
+    </div>
+    <div>
+        <label for="users">Users (comma separated emails):</label>
+        <input type="text" id="users" name="users" required>
+    </div>
+    <div>
+        <label for="paid_by">Paid By (email):</label>
+        <input type="email" id="paid_by" name="paid_by" required>
+    </div>
+    <div>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" required>
+    </div>
+    <div>
+        <label for="group_name">Group Name (optional):</label>
+        <input type="text" id="group_name" name="group_name">
+    </div>
+    <div>
+        <label for="name">Expense Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <button type="submit">Create Expense</button>
+</form>
+{% endblock %}

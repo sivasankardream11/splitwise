@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+    <h1>User Profile</h1>
+    <form method="post" action="{% url 'update_profile' %}">
+        {% csrf_token %}
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="{{ user.profile.name }}">
+        </div>
+        <button type="submit">Update Profile</button>
+    </form>
+    <a href="{% url 'change_password' %}">Change Password</a>
+{% endblock %}

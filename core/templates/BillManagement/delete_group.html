@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Group{% endblock %}
+
+{% block content %}
+<h2>Delete Group</h2>
+<form method="delete" action="{% url 'delete_group' %}">
+    {% csrf_token %}
+    <div>
+        <label for="name">Group Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <button type="submit">Delete Group</button>
+</form>
+{% if message %}
+    <p>{{ message }}</p>
+{% elif error %}
+    <p>{{ error }}</p>
+{% endif %}
+{% endblock %}

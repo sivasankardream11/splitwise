@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Group Details{% endblock %}
+
+{% block content %}
+<h2>Group Details</h2>
+<form method="get" action="{% url 'show_group_details' %}">
+    <div>
+        <label for="name">Group Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <button type="submit">Show Details</button>
+</form>
+
+{% if expenses %}
+    <h3>Expenses</h3>
+    <ul>
+        {% for expense in expenses %}
+            <li>
+                <strong>Name:</strong> {{ expense.name }}<br>
+                <strong>Description:</strong> {{ expense.description }}<br>
+                <strong>Repayments:</strong>
+                <ul>
+                    {% for repayment in expense.repayments %}
+                        <li>{{ repayment }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% elif error %}
+    <p>{{ error }}</p>
+{% endif %}
+{% endblock %}

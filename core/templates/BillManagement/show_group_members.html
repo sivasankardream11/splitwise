@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Group Members{% endblock %}
+
+{% block content %}
+<h2>Group Members</h2>
+<form method="get" action="{% url 'show_group_members' %}">
+    <div>
+        <label for="name">Group Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <button type="submit">Show Members</button>
+</form>
+
+{% if members %}
+    <ul>
+        {% for member in members %}
+            <li>{{ member }}</li>
+        {% endfor %}
+    </ul>
+{% elif error %}
+    <p>{{ error }}</p>
+{% endif %}
+{% endblock %}

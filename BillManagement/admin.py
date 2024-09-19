@@ -1,14 +1,13 @@
 from django.contrib import admin
-from BillManagement.models import Bill, BillSplit
+from BillManagement import models  # Importing models from BillManagement app
 
-@admin.register(Bill)
-class BillAdmin(admin.ModelAdmin):
-    list_display = ('title', 'amount', 'created_by', 'created_at', 'updated_at')
-    search_fields = ('title', 'description')
-    list_filter = ('created_by',)
+# Registering the Debt model to make it accessible in the admin interface
+admin.site.register(models.Debt)
 
-@admin.register(BillSplit)
-class BillSplitAdmin(admin.ModelAdmin):
-    list_display = ('bill', 'paid_by', 'amount_paid', 'owed_by', 'amount_owed', 'status')
-    search_fields = ('bill__title', 'paid_by__username', 'owed_by__username')
-    list_filter = ('status',)
+# Registering the Group model to make it accessible in the admin interface
+admin.site.register(models.Group)
+
+# Registering the Expense model to make it accessible in the admin interface
+admin.site.register(models.Expense)
+
+# You can also customize the admin interface for these models if needed by creating custom admin classes

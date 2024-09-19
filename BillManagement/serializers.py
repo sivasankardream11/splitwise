@@ -1,14 +1,40 @@
 from rest_framework import serializers
-from BillManagement.models import Bill, BillSplit
+from . import models
 
-class BillSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Bill
-        fields = ['id', 'title', 'description', 'amount', 'created_by', 'created_at', 'updated_at']
-        read_only_fields = ['created_by', 'created_at', 'updated_at']
 
-class BillSplitSerializer(serializers.ModelSerializer):
+
+class DebtSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Debt model.
+    """
     class Meta:
-        model = BillSplit
-        fields = ['id', 'bill', 'paid_by', 'amount_paid', 'owed_by', 'amount_owed', 'status']
-        read_only_fields = ['id', 'status']
+        model = models.Debt  # Model to serialize
+        fields = ('id', 'from_user', 'to_user', 'amount')  # Fields to include in the serialization
+
+
+class GroupSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Group model.
+    """
+    class Meta:
+        model = models.Group  # Model to serialize
+        fields = ('id', 'group_name', 'debts', 'members')  # Fields to include in the serialization
+
+
+class ExpenseUserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the ExpenseUser model.
+    """
+    class Meta:
+        model = models.ExpenseUser  # Model to serialize
+        fields = ('id', 'paid_share', 'owed_share', 'net_balance')  # Fields to include in the serialization
+
+
+class ExpenseSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Expense model.
+    """
+    class Meta:
+        model = models.Expense  # Model to serialize
+        fields = ('transaction_id', 'name', 'expense_group', 'description', 'payment',
+                  'amount', 'date', 'repayments', 'users')  # Corrected field names to match the model

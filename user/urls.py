@@ -4,7 +4,8 @@ from user.views import (CreateUser, OTPVerify, GenerateOTP, ResetPassword,
                         UserTokenBlacklistView, UserForgotPassword, UserInfoView, DeleteUser)
 
 urlpatterns = [
-    path('register/', CreateUser.as_view(), name='create-user'),  # Endpoint for user registration
+    #path('register/', CreateUser.as_view(), name='create-user'),  # Endpoint for user registration
+    path('api/user/register/', CreateUser.as_view(), name='create_user'),
     path('verify-otp/', OTPVerify.as_view(), name='verify-otp'),  # Endpoint for OTP verification
     path('generate-otp/', GenerateOTP.as_view(), name='generate-otp'),  # Endpoint for OTP generation
     path('reset-password/', ResetPassword.as_view(), name='reset-password'),  # Endpoint for resetting password
